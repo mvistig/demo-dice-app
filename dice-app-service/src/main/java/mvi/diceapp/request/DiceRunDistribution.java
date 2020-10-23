@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class DiceRunDistribution {
     private long sum;
-    private double relativeDistrib;
+    private int total;
 }

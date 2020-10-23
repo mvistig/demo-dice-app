@@ -16,8 +16,8 @@ public interface DiceRunRepository extends JpaRepository<DiceRun, Long> {
     @Query("select sum(d.numberOfRolls), count(d), d.sidesOfDice, d.numberOfDices from DiceRun d group by d.sidesOfDice, d.numberOfDices")
     public List<Object[]> getSumOfRollsGrouped();
 
-    public List<DiceRun> getAllByNumberOfDicesAndSidesOfDiceOrderById(int numberOfDices,
-                                                                      int sidesOfDices);
+    public List<DiceRun> getAllByNumberOfDicesAndSidesOfDice(int numberOfDices,
+                                                             int sidesOfDices);
 
 
     @Query("select distinct d.numberOfDices, d.numberOfRolls from DiceRun d")
