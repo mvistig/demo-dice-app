@@ -30,8 +30,8 @@ public class BasicDiceService {
     }
 
     long sumXDices(final int sides, final int dices, final Random rdm) {
-        Assert.isTrue(dices > 1, "Dice number is too small");
-        Assert.isTrue(sides > 4, "Sides number is too small");
+        Assert.isTrue(dices >= 1, "Dice number is too small");
+        Assert.isTrue(sides >= 4, "Sides number is too small");
         long sum = 0;
         for (int d = 0; d < dices; d++) {
             sum += 1 + rdm.nextInt(sides);
