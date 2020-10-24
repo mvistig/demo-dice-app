@@ -1,0 +1,21 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+
+    <changeSet id="1" author="mvi">
+        <createTable tableName="DICE_RUN">
+            <column name="ID" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NUMBER_OF_ROLLS" type="int"/>
+            <column name="NUMBER_OF_DICES" type="int"/>
+            <column name="SIDES_OF_DICE" type="int"/>
+            <column name="RESULT_MAP" type="clob"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="mvi">
+        <createSequence sequenceName="SEQ_DICE_ID" incrementBy="1" startValue="1"/>
+    </changeSet>
+</databaseChangeLog>
