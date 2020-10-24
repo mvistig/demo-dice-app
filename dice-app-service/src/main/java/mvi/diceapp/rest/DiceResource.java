@@ -1,31 +1,39 @@
 package mvi.diceapp.rest;
 
+import lombok.val;
 import mvi.diceapp.request.DiceRollRequest;
+import mvi.diceapp.request.DiceRollResponse;
 import mvi.diceapp.service.BasicDiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.Map;
 import java.util.Random;
 
 @RestController
 public class DiceResource {
 
-    @Autowired
-    private BasicDiceService service;
+    private final BasicDiceService service;
 
-    @GetMapping("/dice")
-    @ResponseStatus(HttpStatus.OK)
-    public Map<Long, Integer> getBasicDiceRoll() {
-        return service.rollOfDice(100, 6, 3, new Random());
+    @Autowired
+    public DiceResource(BasicDiceService service) {
+        this.service = service;
     }
 
-    @PostMapping("/dice")
+    @GetMapping(value = "/dice", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public Map<Long, Integer> postCustomDiceRoll(@Valid @NotNull @RequestBody DiceRollRequest request) {
-        return service.rollOfDice(request.getNumberOfRolls(), request.getSidesOfDice(), request.getNumberOfDices(), new Random());
+    public DiceRollResponse getBasicDiceRoll() {
+        val hitMap = service.rollOfDice(100, 6, 3, new Random());
+        return DiceRollResponse.of(hitMap);
+    }
+
+    @PostMapping(value = "/dice", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public DiceRollResponse postCustomDiceRoll(@Valid @NotNull @RequestBody DiceRollRequest request) {
+        val hitMap = service.rollOfDice(request.getNumberOfRolls(), request.getSidesOfDice(), request.getNumberOfDices(), new Random());
+        return DiceRollResponse.of(hitMap);
     }
 }

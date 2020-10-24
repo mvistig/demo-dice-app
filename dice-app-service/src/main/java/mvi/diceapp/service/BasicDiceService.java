@@ -12,8 +12,12 @@ import java.util.Random;
 @Component
 public class BasicDiceService {
 
+    private final DiceRunDataService persistence;
+
     @Autowired
-    private DiceRunDataService persistence;
+    public BasicDiceService(DiceRunDataService persistence) {
+        this.persistence = persistence;
+    }
 
     public Map<Long, Integer> rollOfDice(int rolls, int sides, int dices, final Random rdm) {
         val diceDistrib = new HashMap<Long, Integer>();
