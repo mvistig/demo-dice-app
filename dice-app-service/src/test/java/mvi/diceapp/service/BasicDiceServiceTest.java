@@ -19,12 +19,14 @@ class BasicDiceServiceTest {
 
     @Mock
     private Random random;
+    @Mock
+    private DiceRunDataService persistence;
 
     private BasicDiceService service;
 
     @BeforeEach
     void setUp() {
-        service = new BasicDiceService();
+        service = new BasicDiceService(persistence);
     }
 
     @Test
@@ -32,10 +34,11 @@ class BasicDiceServiceTest {
     void testRollOfDice() {
         //make it return 0, meaning each roll of dice will be 1
         Mockito.when(random.nextInt(ArgumentMatchers.anyInt())).thenReturn(0);
+
         var hitMap = service.rollOfDice(3, 6, 3, random);
 
         assertNotNull(hitMap, "Response must not be null");
-        var actualHits = hitMap.get(3);
+        var actualHits = hitMap.get(3L);
         assertEquals(3, actualHits, "Number of times the sum was rolled is wrong");
     }
 
