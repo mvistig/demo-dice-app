@@ -73,4 +73,5 @@ class BasicDiceServiceTest {
         sum = service.sumXDices(10, diceNb, random);
         assertEquals(diceNb * 2, sum);
     }
+
 }
