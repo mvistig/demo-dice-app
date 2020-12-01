@@ -1,6 +1,8 @@
 # demo-dice-app
 Dice App is a REST microservice that simulates a roll of dice and responds with stats
 
+http://apps.vistig.com:8280/api/swagger-ui.html
+
 
 Assesment
 General instructions 
